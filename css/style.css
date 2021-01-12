@@ -1,0 +1,6 @@
+img{width: 150px;height: 150px;display: inline;}
+.widthcustom {width: 300px;}
+/* nav{display: inline-block;} */
+main nav section {max-width: 100%;}
+main nav section div  {display: inline-block;}
+main nav{display: inline;width: 100%;}
