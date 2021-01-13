@@ -1,6 +1,21 @@
-img{width: 150px;height: 150px;display: inline;}
-.widthcustom {width: 300px;}
-/* nav{display: inline-block;} */
-main nav section {max-width: 100%;}
-main nav section div  {display: inline-block;}
-main nav{display: inline;width: 100%;}
+header{height: 100px;background-color: rgb(135, 233, 250);}
+body{background-color: rgb(221, 222, 223);margin-left: auto;margin-right: auto;}
+main section{margin-right: 20%;margin-left: 20%;}
+main section div{display: inline-block;}
+img{width: 150px;height: 150px;display: inline; margin-left: 20px;}
+img:hover {
+    width: 170px;
+    height: 170px;
+    
+        box-shadow: 10px 10px rgb(41, 35, 35);
+  }
+br{color: rgb(44, 42, 42);}
+p{margin-left: 20%;border: 2px rgb(125, 125, 209) solid;margin-right: 10%;padding: 5px;}
+main section nav{display: inline-block;width: 48%;background-color: rgb(0, 30, 56);}
+h2 {color: rgb(255, 255, 255);}
+footer{height: 100px;background-color:rgb(123, 203, 250) ;}
+button{background-color: rgb(252, 252, 157);border-radius: 12px;}
+/* @keyframes button {
+    from {background-color:rgb(252, 252, 157);}
+    to {background-color: rgb(255, 190, 51);}
+  } */

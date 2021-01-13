@@ -4,14 +4,16 @@ var shownImages = [];
 var firstproductimg = document.getElementById('firstproductimg');
 var secondproductimg = document.getElementById('secondproductimg');
 var thirdproductimg = document.getElementById('thirdproductimg');
+
 var firstproducttext = document.getElementById('firstproduct_h2');
 var secondproducttext = document.getElementById('secondproduct_h2');
 var thirdproducttext = document.getElementById('thirdproduct_h2');
+
 var busmallsection = document.getElementById('allproducts');
+
 var busmallcanvas = document.getElementById('busmallChart').getContext('2d');
+
 var trialsleft = 25;
-// var randomproduct = document.getElementById('busmallitem');
-// randomproduct.addEventListener('click', function () { });
 function BusMall(name, image) {
     this.image = image;
     this.name = name;
@@ -19,8 +21,6 @@ function BusMall(name, image) {
     this.counter = 0;
     busmallproductarray.push(this);
 }
-
-console.log(BusMall);
 new BusMall('bag', 'bag.jpg');
 new BusMall('banana', 'banana.jpg');
 new BusMall('bathroom', 'bathroom.jpg');
@@ -29,25 +29,27 @@ new BusMall('breakfast', 'breakfast.jpg');
 new BusMall('bubblegum', 'bubblegum.jpg');
 new BusMall('chair', 'chair.jpg');
 new BusMall('cthulhu', 'cthulhu.jpg');
-new BusMall('dog-duck', 'dog-duck.jpg');
+new BusMall('dog duck', 'dog-duck.jpg');
 new BusMall('dragon', 'dragon.jpg');
 new BusMall('pen', 'pen.jpg');
-new BusMall('pet-sweep', 'pet-sweep.jpg');
+new BusMall('pet sweep', 'pet-sweep.jpg');
 new BusMall('scissors', 'scissors.jpg');
 new BusMall('shark', 'shark.jpg');
 new BusMall('sweep', 'sweep.png');
 new BusMall('tauntaun', 'tauntaun.jpg');
 new BusMall('unicorn', 'unicorn.jpg');
 new BusMall('usb', 'usb.gif');
-new BusMall('water-can', 'water-can.jpg');
-new BusMall('wine-glass', 'wine-glass.jpg');
+new BusMall('water can', 'water-can.jpg');
+new BusMall('wine glass', 'wine-glass.jpg');
 // console.log(busmallproductarray);
 function renderproduct(firstimg, secondimg, thirdimg) {
     firstproductimg.setAttribute('src', busmallproductarray[firstimg].url);
     secondproductimg.setAttribute('src', busmallproductarray[secondimg].url);
     thirdproductimg.setAttribute('src', busmallproductarray[thirdimg].url);
+    
     firstproducttext.textContent = busmallproductarray[firstimg].name;
     secondproducttext.textContent = busmallproductarray[secondimg].name;
+    
     thirdproducttext.textContent = busmallproductarray[thirdimg].name;
     busmallproductarray[firstimg].numberOfTimesShown++;
     busmallproductarray[secondimg].numberOfTimesShown++;
@@ -58,15 +60,14 @@ function renderChart() {
     var arrayOfproductcount = [];
     var arrayOfproductshown = [];
     busmalldatastoreg();
-    function busmalldatastoreg() {   
-        // localStorage.setItem('order', JSON.stringify(arrayOfproductcount));
+    function busmalldatastoreg() {
     }
     console.log(busmalldatastoreg);
     for (var index = 0; index < busmallproductarray.length; index++) {
         arrayOfproductname.push(busmallproductarray[index].name);
         arrayOfproductcount.push(busmallproductarray[index].counter);
         arrayOfproductshown.push(busmallproductarray[index].numberOfTimesShown);
-// console.log(arrayOfproductname);
+
     }
     var myChart = new Chart(busmallcanvas, {
         type: 'bar',
@@ -135,9 +136,10 @@ function renderChart() {
             }
         }
     });
+        console.log(arrayOfproductcount);
+
 }
 
-// console.log(renderChart);
 function checkAvailability(selectedproductname) {
     for (var index = 0; index < shownImages.length; index++) {
         if (shownImages[index].name === selectedproductname) {
@@ -145,31 +147,21 @@ function checkAvailability(selectedproductname) {
         }
     }
     return false;
+console.log(selectedproductname);
 }
-console.log(checkAvailability);
+
 function pickproduct() {
     let arr = [];
-    for (let i = 0 ; i < 3 ; i++){
+    for (let i = 0; i < 3; i++) {
         do {
             var imgIndex = Math.round(Math.random() * (busmallproductarray.length - 1))
-    
+
         } while (shownImages.includes(imgIndex) || arr.includes(imgIndex));
         arr.push(imgIndex)
     }
     shownImages = arr;;
     console.log(arr);
     renderproduct(arr[0], arr[1], arr[2])
-}
-console.log(shownImages);
-function checkproduct(productindicator) {
-    for (var index = 0; index < busmallproductarray.length; index++) {
-        if (busmallproductarray[index].url === productindicator) {
-            busmallproductarray[index].counter++;
-            trialsleft--;
-            console.log(busmallproductarray);
-        }
-        console.log(arrayOfproductname);
-    }
 }
 console.log(shownImages);
 function checkproduct(productindicator) {
@@ -196,40 +188,68 @@ function countproduct(event) {
     } else {
         // console.log("trialsleft== 0");
         busmallsection.removeEventListener('click', countproduct);
+        console.log(busmallproductarray);
         renderChart();
     }
 }
-pickproduct();
+pickproduct(); 
+       busmallsection.addEventListener('click', countproduct);
+
+
+
+function checkAndRestore(){
+        localStorage.setItem('allproducts',JSON.stringify(busmallproductarray));
+
+    if(localStorage.length>0){
+        busmallproductarray=JSON.parse(localStorage.getItem(allproducts));
+    }
+
+}
+
+checkAndRestore();
+
 // lab 13
-// busmallsection.addEventListener('click', countproduct);
-// var orderarray  = [];
+// var orderarray = [];
 // var orderForm = document.getElementById('orderForm');
 // var orders = document.getElementById('orders');
 // var clearDataBtn = document.getElementById('clearLocalStorage');
 // console.log(localStorage);
+//
+//     var clearDataBtn = document.getElementById('clearLocalStorage');
+
+//     function clearLocalStorage(){
+//         localStorage.clear();
+//         arrayOfproductname = [];
+//         // renderproductorder();
+//     }
+
+//             localStorage.setItem('allproducts', JSON.stringify(arrayOfproductname));
+//             arrayOfproductname = JSON.parse(localStorage.getItem('allproducts')); 
+//             clearDataBtn.addEventListener('click', clearLocalStorage);
+// //
+
+// console.log(arrayOfproductname);
+// }
+
+// console.log(renderChart);
 // function Productorder(name, nameofprouduct, numberofproduct, orderas) {
 //     this.name = name;
 //     this.nameofprouduct = nameofprouduct;
 //     this.numberofproduct = numberofproduct;
 //     this.orderas = orderas;
 //     orderarray.push(this);
-//     busmalldata();  
+//     busmalldata();
 // }
-// function busmalldata() {   
+// function busmalldata() {
 //     localStorage.setItem('order', JSON.stringify(orderarray));
 // }
-// function clearLocalStorage(){
+// function clearLocalStorage() {
 //     localStorage.clear();
 //     orderarray = [];
 //     renderproductorder();
 // }
-// function checkAndRestore() {
-//     if (localStorage.length > 0 ) {
-//         orderarray = JSON.parse(localStorage.getItem('order')); 
-//         renderproductorder();
-//     }
-// }
-// function submitOrder(event){
+// /
+// function submitOrder(event) {
 //     event.preventDefault();
 //     var name = event.target.name.value;
 //     var nameofprouduct = event.target.nameofproduct.value;
@@ -248,32 +268,32 @@ pickproduct();
 //         var par = document.createElement('p');
 //         par.textContent = `${orderasobject.name} wants ${orderasobject.numberofproduct} items of  ${orderasobject.nameofprouduct}   as  ${orderasobject.orderas}  `;
 //         newListItem.appendChild(par);
-//         orders.appendChild(newListItem);   
-//     }  
+//         orders.appendChild(newListItem);
+//     }
 // }
 // orderForm.addEventListener('submit', submitOrder);
 // clearDataBtn.addEventListener('click', clearLocalStorage);
-// checkAndRestore(); 
+// checkAndRestore();
 //////
 //////
 //lab12
 
 // function checkproduct(productindicator) {
-//   // do {
-    //     var firstimg = Math.round(Math.random() * (busmallproductarray.length - 1))
-    //     var firstproductimgname = busmallproductarray[firstimg].name;
-    // } while (checkAvailability(firstproductimgname));
+//   do {
+//         var firstimg = Math.round(Math.random() * (busmallproductarray.length - 1))
+//         var firstproductimgname = busmallproductarray[firstimg].name;
+//     } 
+//     while (checkAvailability(firstproductimgname));
 
-    // do {
-    //     var secondimg = Math.round(Math.random() * (busmallproductarray.length - 1))
-    //     var secondproductimgname = busmallproductarray[secondimg].name;
-    // } while (firstimg == secondimg || secondimg === thirdimg  || checkAvailability(secondproductimgname));
-    // do {
-    //     var thirdimg = Math.round(Math.random() * (busmallproductarray.length - 1))
-    //     var thirdproductimgname = busmallproductarray[secondimg].name;
-    // } while (firstimg === thirdimg || secondimg === thirdimg || checkAvailability(thirdproductimgname));
-
-    // //  do {
-    // //         var thirdimg = Math.round(Math.random() * (busmallproductarray.length - 1))
-    // //         var thirdproductimgname = busmallproductarray[secondimg].name;
-    // //     } while (secondimg === thirdimg && checkAvailability(thirdproductimgname));
+//     do 
+//     {
+//         var secondimg = Math.round(Math.random() * (busmallproductarray.length - 1))
+//         var secondproductimgname = busmallproductarray[secondimg].name;
+//     } while (firstimg == secondimg || secondimg === thirdimg  || checkAvailability(secondproductimgname));
+//     do 
+//     {
+//         var thirdimg = Math.round(Math.random() * (busmallproductarray.length - 1))
+//         var thirdproductimgname = busmallproductarray[secondimg].name;
+//     } 
+//     while (firstimg === thirdimg || secondimg === thirdimg || checkAvailability(thirdproductimgname));
+//     }}
