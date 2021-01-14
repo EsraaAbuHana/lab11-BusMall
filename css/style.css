@@ -1,8 +1,8 @@
 header{height: 100px;background-color: rgb(135, 233, 250);}
-body{background-color: rgb(221, 222, 223);margin-left: auto;margin-right: auto;}
-main section{margin-right: 20%;margin-left: 20%;}
+body{background-color: rgb(221, 222, 223);margin-left: 5%;margin-right: 5%;}
+main section{margin-right: 10%;margin-left: 10%;}
 main section div{display: inline-block;}
-img{width: 150px;height: 150px;display: inline; margin-left: 20px;}
+img{width: 150px;height: 150px;display: inline; margin-left: 10px;}
 img:hover {
     width: 170px;
     height: 170px;
